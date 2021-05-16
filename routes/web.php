@@ -14,7 +14,7 @@ use App\Http\Controllers\FirebaseController;
 |
 */
 
-Route::get('/addPost', [FirebaseController::class, 'addPost']);
+
 Route::get('/', function () {
     return view('welcome');
 });
