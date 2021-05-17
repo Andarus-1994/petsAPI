@@ -12,7 +12,10 @@ class FirebaseController extends Controller
     {
        $searchedPost = [];
        
-       $TimeNow = date('Y-m-d H:i:s');
+     //  $TimeNow = date('Y-m-d H:i:s');
+     date_default_timezone_set('Europe/Berlin');
+     $date= date('d-m-Y H:i:s') ;
+ 
         $firebase = (new Factory)
                     ->withServiceAccount(__DIR__.'/firebaseKey.json')
                     ->withDatabaseUri('https://petsapi-42b65-default-rtdb.firebaseio.com/')
@@ -20,7 +23,7 @@ class FirebaseController extends Controller
                   
         $database = $firebase;
       
-     $newPost = $database->getReference($request->location)->push(["charName"=>$request->name,"message"=>$request->message , "icon"=>$request->icon,"time_stamp"=>$TimeNow,"id_reply"=>$request->id_reply]);
+     $newPost = $database->getReference($request->location)->push(["charName"=>$request->name,"message"=>$request->message , "icon"=>$request->icon,"time_stamp"=>$date,"id_reply"=>$request->id_reply]);
       
    //    $newPost = $database->getReference('shadowlands/familiarExorcist/sylla/posts')->getValue();
    if($newPost->getValue())
