@@ -14,7 +14,7 @@ class FirebaseController extends Controller
        
      //  $TimeNow = date('Y-m-d H:i:s');
      date_default_timezone_set('Europe/Berlin');
-     $date= date('d-m-Y H:i:s') ;
+     $date= date('Y-m-d H:i:s') ;
  
         $firebase = (new Factory)
                     ->withServiceAccount(__DIR__.'/firebaseKey.json')
