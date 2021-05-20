@@ -51,7 +51,9 @@ class FirebaseController extends Controller
         $database = $firebase;
      
      $newPost = $database->getReference($request->location)->getValue();
-    
+  
+  
+     
      if($newPost)
       return $newPost;
       return response()->json(['Empty' => 'No Comments Yet.']);
