@@ -166,23 +166,26 @@ $allPets = PetsController::getAllPets();
 $petsArray = (array)$request->pets;
 $searchedPet = $request->petName;
 $saveDetailsArray =[];
-$saveDetailsArrayRequest =[];
+
 $pageNumber= $request->page;
 
 foreach($allPets as $pet){
     foreach($petsArray as $petRequest){
-       
+      
         if(!empty($searchedPet)){
+            
             if($petRequest['species']['id'] ===$pet['id'] && str_contains(strtolower($pet["name"]),strtolower($searchedPet))){
+            $pet['data'] = $petRequest;
                 array_push($saveDetailsArray,$pet);
-                array_push($saveDetailsArrayRequest,$petRequest);
+               
             }
         }
         if(empty($searchedPet))
         {
             if($petRequest['species']['id'] ===$pet['id'] ){
+                $pet['data'] = $petRequest;
                 array_push($saveDetailsArray,$pet);
-                array_push($saveDetailsArrayRequest,$petRequest);
+                
             }
         }
        
@@ -191,8 +194,8 @@ foreach($allPets as $pet){
 $pageNumberd = ceil(count($saveDetailsArray)/10);
 
 $saveDetailsArray = array_slice($saveDetailsArray,$pageNumber*10,10);
-$saveDetailsArrayRequest = array_slice($saveDetailsArrayRequest,$pageNumber*10,10);
-return response()->json(['data'=>['pets'=>$saveDetailsArray,'ownedPets'=>$saveDetailsArrayRequest],"page" =>$pageNumberd]);
+
+return response()->json(['data'=>$saveDetailsArray,"page" =>$pageNumberd]);
     }
 
    
