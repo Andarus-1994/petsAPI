@@ -167,17 +167,19 @@ $petsArray = (array)$request->pets;
 $searchedPet = $request->petName;
 $saveDetailsArray =[];
 
+
+
 $pageNumber= $request->page;
 
-foreach($allPets as $pet){
+
     foreach($petsArray as $petRequest){
-      
+        foreach($allPets as $pet){
         if(!empty($searchedPet)){
             
             if($petRequest['species']['id'] ===$pet['id'] && str_contains(strtolower($pet["name"]),strtolower($searchedPet))){
             $pet['data'] = $petRequest;
                 array_push($saveDetailsArray,$pet);
-               
+               break;
             }
         }
         if(empty($searchedPet))
@@ -185,7 +187,7 @@ foreach($allPets as $pet){
             if($petRequest['species']['id'] ===$pet['id'] ){
                 $pet['data'] = $petRequest;
                 array_push($saveDetailsArray,$pet);
-                
+                break;
             }
         }
        
