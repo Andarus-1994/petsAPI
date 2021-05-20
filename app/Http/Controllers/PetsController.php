@@ -169,7 +169,7 @@ $saveDetailsArray =[];
 $pageNumber= $request->page;
 
 foreach($allPets as $pet){
-    foreach(array_slice($petsArray,$pageNumber*10,$pageNumber+10) as $petRequest){
+    foreach($petsArray as $petRequest){
        
         if(!empty($searchedPet)){
             if($petRequest['species']['id'] ===$pet['id'] && str_contains(strtolower($pet["name"]),strtolower($searchedPet))){
@@ -185,6 +185,8 @@ foreach($allPets as $pet){
        
     }
 }
+
+$saveDetailsArray = array_slice($saveDetailsArray,$pageNumber*10,$pageNumber+10);
 
 return response()->json($saveDetailsArray);
     }
