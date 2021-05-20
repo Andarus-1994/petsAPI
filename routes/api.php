@@ -17,6 +17,7 @@ use App\Http\Controllers\PetsController;
 |
 */
 
+Route::post('/getPetDetails', [PetsController::class, 'getPetDetails']);
 Route::get('/getAllPets', [PetsController::class, 'getAllPets']);
 Route::get('/getToken', [PetsController::class, 'getToken']);
 Route::post('/addPost', [FirebaseController::class, 'addPost']);

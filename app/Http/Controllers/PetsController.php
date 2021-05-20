@@ -160,6 +160,21 @@ $allPets = $getPetsDB;
 return response()->json($allPets);
     }
 
+    public function getPetDetails(Request $request){
+         
+$allPets = PetsController::getAllPets();
+$petsArray = (array)$request->pets;
+foreach($allPets as $pet){
+    foreach($petsArray as $petRequest){
+        if($petRequest['species']['id'] ===$pet['id']){
+            array_push($saveDetailsArray,$pet);
+        }
+    }
+}
+
+return response()->json($saveDetailsArray);
+    }
+
    
 }
 
