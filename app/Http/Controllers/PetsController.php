@@ -157,15 +157,17 @@ return $newPost->getValue();
 $database = $firebase;
 $getPetsDB = $database->getReference('Pets')->getValue();
 $allPets = $getPetsDB;
-return response()->json($allPets);
+return $allPets;
     }
 
     public function getPetDetails(Request $request){
          
 $allPets = PetsController::getAllPets();
 $petsArray = (array)$request->pets;
+$saveDetailsArray =[];
 foreach($allPets as $pet){
     foreach($petsArray as $petRequest){
+        
         if($petRequest['species']['id'] ===$pet['id']){
             array_push($saveDetailsArray,$pet);
         }
