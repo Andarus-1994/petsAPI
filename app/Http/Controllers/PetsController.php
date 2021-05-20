@@ -186,7 +186,7 @@ foreach($allPets as $pet){
     }
 }
 
-$saveDetailsArray = array_slice($saveDetailsArray,$pageNumber*10,$pageNumber*10+10);
+$saveDetailsArray = array_slice($saveDetailsArray,$pageNumber*10,10);
 
 return response()->json($saveDetailsArray);
     }
