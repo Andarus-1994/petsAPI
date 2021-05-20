@@ -185,10 +185,11 @@ foreach($allPets as $pet){
        
     }
 }
+$pageNumberd = ceil(count($saveDetailsArray)/10);
 
 $saveDetailsArray = array_slice($saveDetailsArray,$pageNumber*10,10);
 
-return response()->json($saveDetailsArray);
+return response()->json(['data'=>$saveDetailsArray,"page" =>$pageNumberd]);
     }
 
    
