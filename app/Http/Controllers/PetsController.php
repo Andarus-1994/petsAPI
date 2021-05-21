@@ -171,9 +171,9 @@ $saveDetailsArray =[];
 
 $pageNumber= $request->page;
 
-
+foreach($allPets as $pet){
     foreach($petsArray as $petRequest){
-        foreach($allPets as $pet){
+   
         if(!empty($searchedPet)){
             
             if($petRequest['species']['id'] ===$pet['id'] && str_contains(strtolower($pet["name"]),strtolower($searchedPet))){
