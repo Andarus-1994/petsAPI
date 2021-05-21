@@ -171,8 +171,9 @@ $saveDetailsArray =[];
 
 $pageNumber= $request->page;
 
+foreach($petsArray as $petRequest){
 foreach($allPets as $pet){
-    foreach($petsArray as $petRequest){
+  
    
         if(!empty($searchedPet)){
             
