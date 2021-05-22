@@ -213,7 +213,7 @@ array_push($typeArraySaved,$pet);
 }
 }
 $saveDetailsArray = $saveDetailsArray->toArray();
-array_unshift($saveDetailsArray,$typeArraySaved);
+array_merge($typeArraySaved,$saveDetailsArray);
 
 $saveDetailsArray = array_slice($saveDetailsArray,$pageNumber*10,10);
 
