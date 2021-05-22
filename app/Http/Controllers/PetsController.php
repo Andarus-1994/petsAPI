@@ -165,11 +165,14 @@ return $allPets;
 $allPets = PetsController::getAllPets();
 $petsArray = (array)$request->pets;
 $searchedPet = $request->petName;
+$type = $request->type;
 $saveDetailsArray =[];
-
+$typeArraySaved = [];
 
 
 $pageNumber= $request->page;
+
+
 
 foreach($petsArray as $petRequest){
 foreach($allPets as $pet){
@@ -195,6 +198,22 @@ foreach($allPets as $pet){
     }
 }
 $pageNumberd = ceil(count($saveDetailsArray)/10);
+$saveDetailsArray = collect($saveDetailsArray);
+if($type){
+$saveDetailsArray = $saveDetailsArray->sortBy(function ($item, $key) {
+    return $item['battle_pet_type']['type'] ;
+});
+
+foreach($saveDetailsArray as $key=>$pet){
+if($pet['battle_pet_type']['type']===$type){
+    
+unset($saveDetailsArray[$key]);
+array_push($typeArraySaved,$pet);
+}
+}
+}
+$saveDetailsArray = $saveDetailsArray->toArray();
+array_unshift($saveDetailsArray,$typeArraySaved);
 
 $saveDetailsArray = array_slice($saveDetailsArray,$pageNumber*10,10);
 
