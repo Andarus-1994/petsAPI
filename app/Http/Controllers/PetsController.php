@@ -162,7 +162,7 @@ return $allPets;
 
     public function getPetDetails(Request $request){
          
-$allPets = PetsController::getAllPets();
+$allPets = $request->allPets;
 $petsArray = (array)$request->pets;
 $searchedPet = $request->petName;
 $type = $request->type;
