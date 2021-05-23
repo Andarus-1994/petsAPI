@@ -160,7 +160,7 @@ $allPets = $getPetsDB;
 return $allPets;
     }
 
-    public function getPetDetails(Request $request){
+ public function getPetDetails(Request $request){
          
 $allPets = $request->allPets;
 $petsArray = (array)$request->pets;
