@@ -29,7 +29,7 @@ class StrategyController extends Controller
      "pet1_breed"=>$request->pet1['breed'],"pet1_rarity"=>$request->pet1['rarity'],"pet1_level"=>$request->pet1['level'],
      "pet2_id"=>$request->pet2["id"],
      "pet2_ability_1"=>$request->pet2["abilitiesChosen"][1],"pet2_ability_2"=>$request->pet2["abilitiesChosen"][2],"pet2_ability_3"=>$request->pet2["abilitiesChosen"][3],
-     "pet2_breed"=>$request->pet1['breed'],"pet2_rarity"=>$request->pet2['rarity'],"pet2_level"=>$request->pet2['level'],
+     "pet2_breed"=>$request->pet2['breed'],"pet2_rarity"=>$request->pet2['rarity'],"pet2_level"=>$request->pet2['level'],
      "pet3_id"=>$request->pet3["id"],
      "pet3_ability_1"=>$request->pet3["abilitiesChosen"][1],"pet3_ability_2"=>$request->pet3["abilitiesChosen"][2],"pet3_ability_3"=>$request->pet3["abilitiesChosen"][3],
      "pet3_breed"=>$request->pet3['breed'],"pet3_rarity"=>$request->pet3['rarity'],"pet3_level"=>$request->pet3['level'],"validation"=>false,"title"=>$request->title,"author"=>$request->author]);
