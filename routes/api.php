@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirebaseController;
 use App\Http\Controllers\PetsController;
 use App\Http\Controllers\StrategyController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ Route::post('/getPosts', [FirebaseController::class, 'getPosts']);
 Route::post('/addStrategy', [StrategyController::class, 'addStrategy']);
 Route::post('/getStrategy', [StrategyController::class, 'getStrategies']);
 Route::post('/getInstructions', [StrategyController::class, 'getInstructions']);
+Route::post('/createUser', [UserController::class, 'register']);
+Route::post('/loginUser', [UserController::class, 'login']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
