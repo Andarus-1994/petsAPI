@@ -96,7 +96,7 @@ class UserController extends Controller
         }
     }
 
-    return response()->json(["error"=>"There is no user with this email!"], 400);
+    return response()->json(["error"=>"There is no user with this email!"]);
     }
 
     function base64url_encode($data) {
