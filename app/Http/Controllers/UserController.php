@@ -37,7 +37,7 @@ class UserController extends Controller
         if($users){
         foreach($users as $user){
            if($user['email'] ===$request->email)
-           return response()->json(["error"=>"Email already used."], 400);
+           return response()->json(["error"=>"Email already used."]);
         }
     }
 
@@ -84,14 +84,19 @@ class UserController extends Controller
                 $token = "$headers_encoded.$payload_encoded.$signature_encoded";
                
                 $decrypted =json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $token)[1]))));
-                return response()->json(["user"=>$decrypted,"token"=>$token], 200);
+                return response()->json(["user"=>$decrypted,"token"=>$token],200);
             }
-            return response()->json(["error"=>"Wrong Password."], 400);
+            return response()->json(["error"=>"Wrong Password."]);
            }
           
            if($header){
             $decrypted =json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $header)[1]))));
-            return response()->json(["Success"=>$decrypted], 200);
+            if( $user['email']===$decrypted->email)
+           {
+          
+          $userObject = ['user' => $user["user"],'email'=>$user['email'],'role'=>$user['role']];
+            return response()->json(["Success"=>$userObject]);
+           }
            }
         }
     }
