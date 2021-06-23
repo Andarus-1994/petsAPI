@@ -25,7 +25,8 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['error'=>$validator->errors()->toJson()]);
         }
-        
+        date_default_timezone_set('Europe/Berlin');
+        $date= date('Y-m-d H:i:s') ;
         $firebase = (new Factory)
         ->withServiceAccount(__DIR__.'/firebaseKey.json')
         ->withDatabaseUri('https://petsapi-42b65-default-rtdb.firebaseio.com/')
@@ -43,7 +44,7 @@ class UserController extends Controller
 
        $user =  $database->getReference("Users")->push(["user"=>$request->json()->get('user'),
        'email' => $request->json()->get('email'),  'role'=>'casual',
-            'password' => Hash::make($request->json()->get('password')),])->getValue();
+            'password' => Hash::make($request->json()->get('password')),"time_stamp"=>$date])->getValue();
 
         return response()->json(compact('user'), 201);
     }
