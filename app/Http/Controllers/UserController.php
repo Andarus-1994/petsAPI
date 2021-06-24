@@ -38,7 +38,7 @@ class UserController extends Controller
         if($users){
         foreach($users as $user){
            if($user['email'] ===$request->email)
-           return response()->json(["error"=>"{'email':['Email already used.']}"]);
+           return response()->json(["error"=>"{\"email\":[\"Email already used.\"]}"]);
         }
     }
 
