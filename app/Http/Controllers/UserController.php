@@ -39,7 +39,10 @@ class UserController extends Controller
         foreach($users as $user){
            if($user['email'] ===$request->email)
            return response()->json(["error"=>"{\"email\":[\"Email already used.\"]}"]);
+           if($user['user'] ===$request->user)
+           return response()->json(["error"=>"{\"user\":[\"User already taken.\"]}"]);
         }
+       
     }
 
        $user =  $database->getReference("Users")->push(["user"=>$request->json()->get('user'),
