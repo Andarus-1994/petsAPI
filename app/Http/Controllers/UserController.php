@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
-
-
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use App\Mail\RegisterMail;
 
 class UserController extends Controller
 {
@@ -34,6 +35,8 @@ class UserController extends Controller
       
         $database = $firebase;
 
+        $token = STR::random(60);
+
         $users = $database->getReference("Users")->getValue();
         if($users){
         foreach($users as $user){
@@ -41,16 +44,45 @@ class UserController extends Controller
            return response()->json(["error"=>"{\"email\":[\"Email already used.\"]}"]);
            if($user['user'] ===$request->user)
            return response()->json(["error"=>"{\"user\":[\"User already taken.\"]}"]);
+           if($user['token']===$token)
+           $token=$token+'17';
         }
        
     }
+ 
 
        $user =  $database->getReference("Users")->push(["user"=>$request->json()->get('user'),
        'email' => $request->json()->get('email'),  'role'=>'casual',
-            'password' => Hash::make($request->json()->get('password')),"time_stamp"=>$date])->getValue();
-
+            'password' => Hash::make($request->json()->get('password')),"time_stamp"=>$date, "token"=>$token, "verified"=>false] )->getValue();
+            Mail::to($request->json()->get('email'))->send(new RegisterMail($token));
         return response()->json(compact('user'), 201);
     }
+
+    public function validateUser(Request $request){
+        $firebase = (new Factory)
+        ->withServiceAccount(__DIR__.'/firebaseKey.json')
+        ->withDatabaseUri('https://petsapi-42b65-default-rtdb.firebaseio.com/')
+        ->createDatabase();
+    
+        $database = $firebase;
+        $users = $database->getReference("Users")->getValue();
+        if($users){
+            foreach($users as &$user){
+             
+                if($user['token']===$request->token){
+                $user['token'] = 0;
+                $user['verified']=true;
+                    
+                }
+            
+            }
+        }
+       
+        $database->getReference('Users')->set($users);
+        return response()->json(["success"=>"Your account has been verified!"]);
+    }
+
+   
 
     public function login(Request $request)
     {

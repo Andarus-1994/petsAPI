@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FirebaseController;
+use App\Mail\RegisterMail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +15,9 @@ use App\Http\Controllers\FirebaseController;
 |
 */
 
-
+Route::get('/getMail', function(){
+    return new RegisterMail();
+});
 Route::get('/', function () {
     return view('welcome');
 });

@@ -27,6 +27,7 @@ Route::post('/getPosts', [FirebaseController::class, 'getPosts']);
 Route::post('/addStrategy', [StrategyController::class, 'addStrategy']);
 Route::post('/getStrategy', [StrategyController::class, 'getStrategies']);
 Route::post('/getInstructions', [StrategyController::class, 'getInstructions']);
+Route::post('/validateUser', [UserController::class, 'validateUser']);
 Route::post('/createUser', [UserController::class, 'register']);
 Route::post('/loginUser', [UserController::class, 'login']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
