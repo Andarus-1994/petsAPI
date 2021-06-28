@@ -81,7 +81,7 @@ class UserController extends Controller
         $database->getReference('Users')->set($users);
         if($found)
         return response()->json(["success"=>"Your account has been verified!"]);
-        return response()->json(["error"=>"Your account has been already verified!"]);
+        return response()->json(["error"=>"Your account has been verified already!"]);
     }
 
    
