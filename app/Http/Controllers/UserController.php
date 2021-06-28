@@ -111,7 +111,7 @@ class UserController extends Controller
                 $headers_encoded = $this->base64url_encode(json_encode($headers));
                 
                 //build the payload
-                $payload = ['sub'=>'-McNng4hjjowUlpdUKUL','user'=>$user['user'], 'email'=>$user['email'], 'role'=>$user['role']];
+                $payload = ['sub'=>'-McNng4hjjowUlpdUKUL','user'=>$user['user'], 'email'=>$user['email'], 'role'=>$user['role'], 'verified'=>$user['verified']];
                 $payload_encoded = $this->base64url_encode(json_encode($payload));
                 
                 $key = 'bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=';
