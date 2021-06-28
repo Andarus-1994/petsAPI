@@ -63,7 +63,7 @@ class UserController extends Controller
         ->withServiceAccount(__DIR__.'/firebaseKey.json')
         ->withDatabaseUri('https://petsapi-42b65-default-rtdb.firebaseio.com/')
         ->createDatabase();
-    
+        $found = false;
         $database = $firebase;
         $users = $database->getReference("Users")->getValue();
         if($users){
@@ -72,14 +72,16 @@ class UserController extends Controller
                 if($user['token']===$request->token){
                 $user['token'] = 0;
                 $user['verified']=true;
-                    
+                  $found=true;  
                 }
             
             }
         }
        
         $database->getReference('Users')->set($users);
+        if($found)
         return response()->json(["success"=>"Your account has been verified!"]);
+        return response()->json(["error"=>"Your account has been already verified!"]);
     }
 
    
