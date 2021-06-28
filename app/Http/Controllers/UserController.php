@@ -36,7 +36,7 @@ class UserController extends Controller
         $database = $firebase;
 
         $token = STR::random(60);
-
+ 
         $users = $database->getReference("Users")->getValue();
         if($users){
         foreach($users as $user){
@@ -45,10 +45,10 @@ class UserController extends Controller
            if($user['user'] ===$request->user)
            return response()->json(["error"=>"{\"user\":[\"User already taken.\"]}"]);
            if($user['token']===$token)
-           $token=$token+'17';
+            $token=$token+'17';
         }
-       
-    }
+        
+    } 
  
 
        $user =  $database->getReference("Users")->push(["user"=>$request->json()->get('user'),
@@ -75,9 +75,9 @@ class UserController extends Controller
                   $found=true;  
                 }
             
-            }
+            } 
         }
-       
+        
         $database->getReference('Users')->set($users);
         if($found)
         return response()->json(["success"=>"Your account has been verified!"]);
@@ -132,7 +132,7 @@ class UserController extends Controller
             if( $user['email']===$decrypted->email)
            {
           
-          $userObject = ['user' => $user["user"],'email'=>$user['email'],'role'=>$user['role']];
+          $userObject = ['user' => $user["user"],'email'=>$user['email'],'role'=>$user['role'], 'verified'=>$user['verified']];
             return response()->json(["Success"=>$userObject]);
            }
            }
