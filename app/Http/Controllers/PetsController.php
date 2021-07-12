@@ -62,8 +62,12 @@ $getPetsDB = $database->getReference('Pets')->getValue();
 $allPets = $getPetsDB;
 
 foreach($pets as $pet){
-   
-    if($pet['id']> 1499){
+    $foundPet = false;
+   foreach($allPets as $petDB){
+    if($pet['id']===$petDB['id'])
+    $foundPet = true;
+   }
+    if($pet['id']> 1499 && !$foundPet){
         
 $res2 = $client->get('https://eu.api.blizzard.com/data/wow/pet/' .$pet['id'] .'?namespace=static-eu&locale=en_US&access_token=' .
 $token);
@@ -80,37 +84,37 @@ $object->description = $petDetails["description"];
 $object->source = ["type"=>$petDetails["source"]["type"], "name"=>$petDetails["source"]["name"]];
 if($petDetails["abilities"][0]["ability"]["id"] ?? "")
 {
-$res3 = $client->get('https://eu.api.blizzard.com/data/wow/media/pet-ability/'. $petDetails["abilities"][0]["ability"]["id"] .'?namespace=static-9.0.5_37760-eu&access_token=' .
+$res3 = $client->get('https://eu.api.blizzard.com/data/wow/media/pet-ability/'. $petDetails["abilities"][0]["ability"]["id"] .'?namespace=static-9.1.0_39069-eu&access_token=' .
 $token);
 $petAbilityOne = json_decode($res3->getBody(),true);
 }
 if($petDetails["abilities"][1]["ability"]["id"] ?? "")
 {
-$res3 = $client->get('https://eu.api.blizzard.com/data/wow/media/pet-ability/'. $petDetails["abilities"][1]["ability"]["id"] .'?namespace=static-9.0.5_37760-eu&access_token=' .
+$res3 = $client->get('https://eu.api.blizzard.com/data/wow/media/pet-ability/'. $petDetails["abilities"][1]["ability"]["id"] .'?namespace=static-9.1.0_39069-eu&access_token=' .
 $token);
 $petAbilityTwo = json_decode($res3->getBody(),true);
 }
 if($petDetails["abilities"][2]["ability"]["id"]?? "")
 {
-$res3 = $client->get('https://eu.api.blizzard.com/data/wow/media/pet-ability/'. $petDetails["abilities"][2]["ability"]["id"] .'?namespace=static-9.0.5_37760-eu&access_token=' .
+$res3 = $client->get('https://eu.api.blizzard.com/data/wow/media/pet-ability/'. $petDetails["abilities"][2]["ability"]["id"] .'?namespace=static-9.1.0_39069-eu&access_token=' .
 $token);
 $petAbilityThree = json_decode($res3->getBody(),true);
 }
 if($petDetails["abilities"][3]["ability"]["id"]?? "")
 {
-$res3 = $client->get('https://eu.api.blizzard.com/data/wow/media/pet-ability/'. $petDetails["abilities"][3]["ability"]["id"] .'?namespace=static-9.0.5_37760-eu&access_token=' .
+$res3 = $client->get('https://eu.api.blizzard.com/data/wow/media/pet-ability/'. $petDetails["abilities"][3]["ability"]["id"] .'?namespace=static-9.1.0_39069-eu&access_token=' .
 $token);
 $petAbilityFour = json_decode($res3->getBody(),true);
 }
 if($petDetails["abilities"][4]["ability"]["id"]?? "")
 {
-$res3 = $client->get('https://eu.api.blizzard.com/data/wow/media/pet-ability/'. $petDetails["abilities"][4]["ability"]["id"] .'?namespace=static-9.0.5_37760-eu&access_token=' .
+$res3 = $client->get('https://eu.api.blizzard.com/data/wow/media/pet-ability/'. $petDetails["abilities"][4]["ability"]["id"] .'?namespace=static-9.1.0_39069-eu&access_token=' .
 $token);
 $petAbilityFive = json_decode($res3->getBody(),true);
 }
 if($petDetails["abilities"][5]["ability"]["id"] ?? "")
 {
-$res3 = $client->get('https://eu.api.blizzard.com/data/wow/media/pet-ability/'. $petDetails["abilities"][5]["ability"]["id"] .'?namespace=static-9.0.5_37760-eu&access_token=' .
+$res3 = $client->get('https://eu.api.blizzard.com/data/wow/media/pet-ability/'. $petDetails["abilities"][5]["ability"]["id"] .'?namespace=static-9.1.0_39069-eu&access_token=' .
 $token);
 $petAbilitySix = json_decode($res3->getBody(),true);
 }
@@ -130,6 +134,7 @@ array_push($allPets,$pet);
  
 
 }
+   
 }
 
 $firebase = (new Factory)
@@ -146,8 +151,8 @@ if($newPost->getValue())
 return response()->json(['success' => 'Your message has been posted']);
 return $newPost->getValue(); 
     }
-    */
-
+    
+*/
     public function getAllPets(){
         $firebase = (new Factory)
 ->withServiceAccount(__DIR__.'/firebaseKey.json')

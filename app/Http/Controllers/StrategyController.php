@@ -32,7 +32,7 @@ class StrategyController extends Controller
      "pet2_breed"=>$request->pet2['breed'],"pet2_rarity"=>$request->pet2['rarity'],"pet2_level"=>$request->pet2['level'],
      "pet3_id"=>$request->pet3["id"],
      "pet3_ability_1"=>$request->pet3["abilitiesChosen"][1],"pet3_ability_2"=>$request->pet3["abilitiesChosen"][2],"pet3_ability_3"=>$request->pet3["abilitiesChosen"][3],
-     "pet3_breed"=>$request->pet3['breed'],"pet3_rarity"=>$request->pet3['rarity'],"pet3_level"=>$request->pet3['level'],"validation"=>false,"title"=>$request->title,"author"=>$request->author]);
+     "pet3_breed"=>$request->pet3['breed'],"pet3_rarity"=>$request->pet3['rarity'],"pet3_level"=>$request->pet3['level'],"validation"=>false,"title"=>$request->title,"author"=>$request->author, "rng"=>$request->rng]);
       
      foreach($request->instructions as $instruction){
          $database->getReference("StrategyInstructions/".$request->location)->push(["id_strategy"=>$newPost->getKey(),"turn"=>$instruction["turn"],"instruction"=>$instruction["instructions"]]);

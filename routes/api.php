@@ -18,7 +18,7 @@ use App\Http\Controllers\UserController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::get('/getPets', [PetsController::class, 'getPets']);
 Route::post('/getPetDetails', [PetsController::class, 'getPetDetails']);
 Route::get('/getAllPets', [PetsController::class, 'getAllPets']);
 Route::get('/getToken', [PetsController::class, 'getToken']);
