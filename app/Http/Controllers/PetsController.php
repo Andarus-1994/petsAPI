@@ -231,8 +231,8 @@ class PetsController extends Controller
         $saveDetailsArray =[];
         $typeArraySaved = [];
         $pageNumber= $request->page;
-    
-    
+        
+        
         foreach ($allPets as $pet) {
             if (!empty($searchedPet)) {
                 if (str_contains(strtolower($pet["name"]), strtolower($searchedPet))) {
@@ -247,20 +247,9 @@ class PetsController extends Controller
     
         $pageNumberd = ceil(count($saveDetailsArray)/10);
         $saveDetailsArray = collect($saveDetailsArray);
-        if ($type) {
-            $saveDetailsArray = $saveDetailsArray->sortBy(function ($item, $key) {
-                return $item['battle_pet_type']['type'] ;
-            });
-    
-            foreach ($saveDetailsArray as $key=>$pet) {
-                if ($pet['battle_pet_type']['type']===$type) {
-                    unset($saveDetailsArray[$key]);
-                    array_push($typeArraySaved, $pet);
-                }
-            }
-        }
+       
         $saveDetailsArray = $saveDetailsArray->toArray();
-        $saveDetailsArray=array_merge($typeArraySaved, $saveDetailsArray);
+       
     
         $saveDetailsArray = array_slice($saveDetailsArray, $pageNumber*10, 10);
     
