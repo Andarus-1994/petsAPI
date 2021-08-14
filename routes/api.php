@@ -21,6 +21,7 @@ use App\Http\Controllers\UserController;
 Route::get('/getPets', [PetsController::class, 'getPets']);
 Route::post('/getPetDetails', [PetsController::class, 'getPetDetails']);
 Route::get('/getAllPets', [PetsController::class, 'getAllPets']);
+Route::post('/getSearchedPet', [PetsController::class, 'getSearchedPet']);
 Route::get('/getToken', [PetsController::class, 'getToken']);
 Route::post('/addPost', [FirebaseController::class, 'addPost']);
 Route::post('/getPosts', [FirebaseController::class, 'getPosts']);
