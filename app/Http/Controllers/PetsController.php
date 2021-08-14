@@ -238,12 +238,10 @@ class PetsController extends Controller
                 if (str_contains(strtolower($pet["name"]), strtolower($searchedPet))) {
                     $pet['data'] = $pet;
                     array_push($saveDetailsArray, $pet);
-                    break;
                 }
             }
             if (empty($searchedPet)) {
                 array_push($saveDetailsArray, $pet);
-                break;
             }
         }
     
