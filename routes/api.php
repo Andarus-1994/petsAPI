@@ -7,6 +7,7 @@ use App\Http\Controllers\FirebaseController;
 use App\Http\Controllers\PetsController;
 use App\Http\Controllers\StrategyController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FeedbackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ use App\Http\Controllers\UserController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/getFeedback', [FeedbackController::class, 'getFeedback']);
+Route::post('/addFeedback', [FeedbackController::class, 'addFeedback']);
 Route::get('/getPets', [PetsController::class, 'getPets']);
 Route::post('/getPetDetails', [PetsController::class, 'getPetDetails']);
 Route::get('/getAllPets', [PetsController::class, 'getAllPets']);
